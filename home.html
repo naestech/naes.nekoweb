@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nae!</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="content-column">
+      <div class="box">
+        <div class="title">
+          <h2>welcome to my website!</h2>
+        </div>
+        <div class="main-content">
+          <p>currently under construction. mind the mess!</p>
+          <img src="https://naes.nekoweb.org/cat.gif">
+        </div>
+        <div class="footer">
+          naes.tech
+        </div>
+      </div>
+    </div>
+    
+    <div class="ipod-column">
+      <div class="site-stats">
+        <div id="created"></div>
+        <div id="updated"></div>
+        <div id="visitors"></div>
+        <div id="followers"></div>
+      </div>
+      <div class="back-cover">
+        <div class="main">
+          <div class="screen">
+            <div id="lastfm" class="track-display"></div>
+          </div>
+          <div class="navigator">        
+            <div class="keys">       
+              <span class="menu-btn">MENU</span>
+              <img class="fwd" src="https://cdn2.iconfinder.com/data/icons/snipicons/5000/fast-forward-256.png">
+              <img class="bkd" src="https://cdn2.iconfinder.com/data/icons/snipicons/5000/fast-backward-128.png">
+              <img class="play-pause" src="https://cdn2.iconfinder.com/data/icons/snipicons/5000/play-128.png">
+              <div class="play"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let username = "naes";
+
+    (async () => {
+      try {
+        const request = await fetch(`https://nekoweb.org/api/site/info/${username}`);
+        const json = await request.json();
+
+        const formatDate = (dateString) => {
+          const date = new Date(dateString);
+          const months = ['january', 'february', 'march', 'april', 'may', 'june', 
+                         'july', 'august', 'september', 'october', 'november', 'december'];
+          
+          const day = date.getDate();
+          const month = months[date.getMonth()];
+          const year = date.getFullYear();
+          
+          const getOrdinal = (n) => {
+            const s = ['th', 'st', 'nd', 'rd'];
+            const v = n % 100;
+            return n + (s[(v - 20) % 10] || s[v] || s[0]);
+          };
+
+          return `${month} ${getOrdinal(day)}, ${year}`;
+        };
+
+        const updated = formatDate(json.updated_at);
+        const created = formatDate(json.created_at);
+
+        if (document.getElementById("created")) document.getElementById("created").innerHTML = `<em>created:</em>${created}`;
+        if (document.getElementById("updated")) document.getElementById("updated").innerHTML = `<em>updated:</em>${updated}`;
+        if (document.getElementById("visitors")) document.getElementById("visitors").innerHTML = `<em>visits:</em>${json.views}`;
+        if (document.getElementById("followers")) document.getElementById("followers").innerHTML = `<em>followers:</em>${json.followers}`;
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  </script>
+
+  <script>
+    const USERNAME = "naestech";
+    const BASE_URL = `https://lastfm-last-played.biancarosa.com.br/${USERNAME}/latest-song`;
+
+    let lastPlayedTrack = null;
+
+    const getTrack = async () => {
+        try {
+            const request = await fetch(BASE_URL);
+            const json = await request.json();
+            console.log('API Response:', json);
+            const screen = document.querySelector('.screen');
+            
+            if (json.track) {
+                const trackData = {
+                    name: json.track.name,
+                    artist: json.track.artist['#text'],
+                    album: json.track.album['#text']
+                };
+
+                const isPlaying = json.track['@attr']?.nowplaying === 'true';
+                
+                if (isPlaying) {
+                    lastPlayedTrack = trackData;
+                    screen.classList.remove('last-played');
+                    screen.classList.add('now-playing');
+                } else {
+                    screen.classList.remove('now-playing');
+                    screen.classList.add('last-played');
+                    if (!lastPlayedTrack) {
+                        lastPlayedTrack = trackData;
+                    }
+                }
+
+                document.getElementById("lastfm").innerHTML = `
+                    <div class="song">${trackData.name}</div>
+                    <div class="artist">${trackData.artist}</div>
+                    <div class="album">${trackData.album || 'Unknown Album'}</div>
+                `;
+            } else {
+                screen.classList.remove('now-playing', 'last-played');
+                document.getElementById("lastfm").innerHTML = `
+                    <div class="song">No song</div>
+                    <div class="artist">information</div>
+                    <div class="album">available</div>
+                `;
+            }
+        } catch (error) {
+            console.error("Error fetching track:", error);
+            document.getElementById("lastfm").innerHTML = `
+                <div class="song">Error</div>
+                <div class="artist">loading</div>
+                <div class="album">track data</div>
+            `;
+        }
+    };
+
+    getTrack();
+    setInterval(getTrack, 10000);
+  </script>
+</body>
+</html>
