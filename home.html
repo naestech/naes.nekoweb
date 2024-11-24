@@ -10,6 +10,29 @@
 
 <body>
   <div class="wrapper">
+    <div class="nav-column">
+      <div class="nav-container">
+        <h3>navigation</h3>
+        <div class="section">
+          <div class="nav-menu">
+            <a href="/words.html" class="nav-item">words</a>
+            <a href="/photos.html" class="nav-item">photos</a>
+            <a href="/memes.html" class="nav-item">memes</a>
+            <a href="/links.html" class="nav-item">links</a>
+          </div>
+        </div>
+        <h3>statistics</h3>
+        <div class="section">
+          <div class="site-stats">
+            <div id="created"></div>
+            <div id="updated"></div>
+            <div id="visitors"></div>
+            <div id="followers"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="content-column">
       <div class="box">
         <div class="title">
@@ -26,16 +49,12 @@
     </div>
     
     <div class="ipod-column">
-      <div class="site-stats">
-        <div id="created"></div>
-        <div id="updated"></div>
-        <div id="visitors"></div>
-        <div id="followers"></div>
-      </div>
       <div class="back-cover">
         <div class="main">
           <div class="screen">
-            <div id="lastfm" class="track-display"></div>
+            <a href="https://www.last.fm/user/naestech" target="_blank">
+              <div id="lastfm" class="track-display"></div>
+            </a>
           </div>
           <div class="navigator">        
             <div class="keys">       
@@ -61,29 +80,22 @@
 
         const formatDate = (dateString) => {
           const date = new Date(dateString);
-          const months = ['january', 'february', 'march', 'april', 'may', 'june', 
-                         'july', 'august', 'september', 'october', 'november', 'december'];
           
-          const day = date.getDate();
-          const month = months[date.getMonth()];
-          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          const day = String(date.getDate()).padStart(2, '0');
           
-          const getOrdinal = (n) => {
-            const s = ['th', 'st', 'nd', 'rd'];
-            const v = n % 100;
-            return n + (s[(v - 20) % 10] || s[v] || s[0]);
-          };
-
-          return `${month} ${getOrdinal(day)}, ${year}`;
+          const year = String(date.getFullYear()).slice(-2);
+          
+          return `${month}.${day}.${year}`;
         };
 
         const updated = formatDate(json.updated_at);
         const created = formatDate(json.created_at);
 
-        if (document.getElementById("created")) document.getElementById("created").innerHTML = `<em>created:</em>${created}`;
-        if (document.getElementById("updated")) document.getElementById("updated").innerHTML = `<em>updated:</em>${updated}`;
-        if (document.getElementById("visitors")) document.getElementById("visitors").innerHTML = `<em>visits:</em>${json.views}`;
-        if (document.getElementById("followers")) document.getElementById("followers").innerHTML = `<em>followers:</em>${json.followers}`;
+        if (document.getElementById("created")) document.getElementById("created").innerHTML = `<em>created:</em> ${created}`;
+        if (document.getElementById("updated")) document.getElementById("updated").innerHTML = `<em>updated:</em> ${updated}`;
+        if (document.getElementById("visitors")) document.getElementById("visitors").innerHTML = `<em>visits:</em> ${json.views}`;
+        if (document.getElementById("followers")) document.getElementById("followers").innerHTML = `<em>followers:</em> ${json.followers}`;
       } catch (error) {
         console.error(error);
       }
@@ -132,7 +144,7 @@
             } else {
                 screen.classList.remove('now-playing', 'last-played');
                 document.getElementById("lastfm").innerHTML = `
-                    <div class="song">No song</div>
+                    <div class="song">no song</div>
                     <div class="artist">information</div>
                     <div class="album">available</div>
                 `;
@@ -140,7 +152,7 @@
         } catch (error) {
             console.error("Error fetching track:", error);
             document.getElementById("lastfm").innerHTML = `
-                <div class="song">Error</div>
+                <div class="song">error</div>
                 <div class="artist">loading</div>
                 <div class="album">track data</div>
             `;
