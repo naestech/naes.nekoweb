@@ -1,7 +1,34 @@
+:root {
+  font-size: 12px;
+}
+
+.nav-container {
+  font-size: 0.75rem;
+}
+
+.back-cover {
+  transform: scale(0.75);
+  transform-origin: center;
+}
+
+/* adjust spacing */
+.nav-container h3 {
+  margin-bottom: 5px;
+}
+
+.section {
+  margin: 5px 0;
+}
+
+/* ipod margins */
+.back-cover {
+  margin: 5px 0 !important;
+}
+
 /* background */
 body {
   margin: 0;
-  background-image: url('https://naes.nekoweb.org/cows.png');
+  background-color: #ffffff;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -15,8 +42,8 @@ body {
 /* navbar */
 .nav-menu {
   background: white;
-  border: 2px dotted #647C80;
-  border-radius: 10px;
+  border: 3px solid black;
+  border-radius: 0;
   padding: 1rem;
   width: 200px;
   box-sizing: border-box;
@@ -27,9 +54,8 @@ body {
 }
 
 .nav-item {
-  color: #647C80;
+  color: black;
   text-decoration: none;
-  font-weight: bold;
   font-size: 14px;
   padding: 5px 5px;
   transition: all 0.2s;
@@ -37,7 +63,7 @@ body {
 
 .nav-item:hover {
   color: white;
-  background: #647C80;
+  background: black;
   border-radius: 5px;
 }
 
@@ -62,8 +88,7 @@ body {
 }
 
 .content-column {
-  flex: 1;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 8rem);
   padding: 0;
   position: relative;
   display: flex;
@@ -103,24 +128,18 @@ body {
 
 .content-column .box {
   background: white;
-  border: 3px dashed #647C80;
-  border-radius: 15px;
+  border: 3px solid black;
+  border-radius: 0;
   padding: 2rem;
-  height: calc(100vh - 8rem);
-  overflow-y: auto;
   padding-right: 3rem;
   display: flex;
   flex-direction: column;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
 }
 
 .content-column .box .main-content {
   flex: 1;
-  overflow-y: auto;
-}
-
-.content-column .box .footer {
-  margin-top: auto;
-  padding-top: 1rem;
 }
 
 .content-column .title h2 {
@@ -133,7 +152,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 150px;
-  border: 2px dashed #647C80;
+  border: 3px solid #black;
   padding: 0.5rem;
   margin: 0.25rem 0;
   box-sizing: border-box;
@@ -147,7 +166,7 @@ body {
 
 .site-stats em {
   display: inline;
-  color: #647C80;
+  color: black;
   font-style: normal;
   font-weight: bold;
 }
@@ -155,13 +174,13 @@ body {
 /* nav and stats */
 .nav-container {
   background: white;
-  border: 3px dashed #647C80;
-  border-radius: 10px;
+  border: 3px solid black;
   padding: 0.75rem 2rem;
   width: 200px;
   box-sizing: border-box;
   margin: 0 auto;
   text-align: center;
+  font-size: 0.75rem;
 }
 
 .nav-container h3 {
@@ -188,7 +207,7 @@ body {
   gap: 2px;
   width: 100%;
   max-width: 150px;
-  border: 2px dashed #647C80;
+  border: 3px solid black;
   padding: 0.5rem;
   margin: 0.25rem 0;
 }
@@ -198,7 +217,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 150px;
-  border: 2px dashed #647C80;
+  border: 3px solid black;
   padding: 0.5rem;
   margin: 0.25rem 0;
   box-sizing: border-box;
@@ -212,7 +231,7 @@ body {
 
 .site-stats em {
   display: inline;
-  color: #647C80;
+  color: black;
   font-style: normal;
   font-weight: bold;
 }
@@ -237,34 +256,36 @@ body {
 
 /* ipod */
 .back-cover {
-  width: 300px;  
-  height: 500px;
+  width: 150px;
+  height: 250px;
   background: #cccccc;
   margin: 20px auto;
-  border-radius: 30px;
+  border-radius: 15px;
   z-index: 1;
   box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.4);
+  transform: scale(0.75);
+  transform-origin: center;
 }
 
 .main {
-  width: 300px;
-  height: 500px;
+  width: 150px;
+  height: 250px;
   background: #f0f0f0;
   margin: auto;
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 15px;
   position: relative;
-  top: -8px;
-  left: 8px;
+  top: -4px;
+  left: 4px;
 }
 
 .screen {
-  width: 260px;
-  height: 200px;
+  width: 130px;
+  height: 100px;
   background: #2e2e2e;
-  margin: 12px auto;
-  border: 4px solid #555555;
-  border-radius: 5px;
+  margin: 6px auto;
+  border: 2px solid #555555;
+  border-radius: 3px;
   cursor: pointer;
 }
 
@@ -277,18 +298,18 @@ body {
 }
 
 .navigator {
-  width: 260px;
-  height: 230px;
+  width: 130px;
+  height: 115px;
   margin: auto;
   overflow: hidden;
   position: relative;
 }
 
 .keys {
-  width: 210px;
-  height: 210px;
+  width: 105px;
+  height: 105px;
   background: white;
-  margin: 6px auto;
+  margin: 3px auto;
   overflow: hidden;
   border-radius: 100%;
   box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
@@ -297,11 +318,11 @@ body {
 .menu-btn{
   display: block;
   position: absolute;
-  top: 32px;
-  left: 107px;
+  top: 12px;
+  left: 42px;
   font-family: Helvetica, Arial, sans-serif;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 10px;
   color: gray;
 }
 
@@ -315,10 +336,10 @@ body {
 }
 
 .fwd{
-  width: 22px;
+  width: 15px;
   position: absolute;
-  top: 108px;
-  left: 195px;
+  top: 50px;
+  left: 98px;
 }
 
 img.fwd{  
@@ -348,10 +369,10 @@ img.fwd:hover{
 }
 
 .bkd{
-  width: 22px;
+  width: 15px;
   position: absolute;
-  top: 108px;
-  left: 41px;
+  top: 50px;
+  left: 20px;
 }
 
 img.bkd{  
@@ -376,10 +397,10 @@ img.bkd:hover{
 }
 
 .play-pause{
-  width: 28px;
+  width: 18px;
   position: absolute;
-  top: 182px;
-  left: 120px;
+  top: 85px;
+  left: 57px;
 }
 
 img.play-pause{  
@@ -399,16 +420,17 @@ img.play-pause:hover{
 }
 
 .play{
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   background: #f0f0f0;
-  margin: 54px auto;
+  margin: 27px auto;
   border-radius: 100%;
   -webkit-box-shadow: inset 0px -2px 14px -1px rgba(0,0,0,0.3);
      -moz-box-shadow: inset 0px -2px 14px -1px rgba(0,0,0,0.3);
           box-shadow: inset 0px -2px 14px -1px rgba(0,0,0,0.3);
 }
 
+/* track display styles */
 .track-display {
   height: 100%;
   display: flex;
@@ -417,24 +439,56 @@ img.play-pause:hover{
   align-items: center;
   color: white;
   text-align: center;
-  padding: 10px;
+  padding: 5px;
   font-family: Helvetica, Arial, sans-serif;
 }
 
+.track-display .song,
+.track-display .artist,
+.track-display .album {
+  width: 110px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
 .track-display .song {
-  font-size: 18px;
+  font-size: 9px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
 .track-display .artist {
-  font-size: 16px;
-  margin-bottom: 5px;
+  font-size: 8px;
+  margin-bottom: 2px;
 }
 
 .track-display .album {
-  font-size: 14px;
+  font-size: 7px;
   color: #cccccc;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(110px);
+  }
+  to {
+    transform: translateX(calc(-1 * var(--scroll-width)));
+  }
+}
+
+.scrolling-text {
+  display: inline-block;
+  animation: scroll var(--duration, 30s) linear infinite;
+  animation-delay: 3s;
+  padding-right: 30px;
+  white-space: nowrap;
+  animation-play-state: running;
+}
+
+.static-text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .screen.now-playing {

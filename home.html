@@ -12,8 +12,8 @@
   <div class="wrapper">
     <div class="nav-column">
       <div class="nav-container">
-        <h3>navigation</h3>
-        <div class="section">
+        <h3 style="margin-bottom: 1px;">navigation</h3>
+        <div class="section" style="margin-bottom: 2px;">
           <div class="nav-menu">
             <a href="/words.html" class="nav-item">words</a>
             <a href="/photos.html" class="nav-item">photos</a>
@@ -21,13 +21,32 @@
             <a href="/links.html" class="nav-item">links</a>
           </div>
         </div>
-        <h3>statistics</h3>
+        <div style="display: flex; justify-content: center; width: 100%; margin: 2px 0;">
+          <div class="back-cover">
+            <div class="main">
+              <div class="screen">
+                <a href="https://www.last.fm/user/naestech" target="_blank">
+                  <div id="lastfm" class="track-display"></div>
+                </a>
+              </div>
+              <div class="navigator">        
+                <div class="keys">       
+                  <span class="menu-btn">MENU</span>
+                  <img class="fwd" src="https://cdn2.iconfinder.com/data/icons/snipicons/5000/fast-forward-256.png">
+                  <img class="bkd" src="https://cdn2.iconfinder.com/data/icons/snipicons/5000/fast-backward-128.png">
+                  <img class="play-pause" src="https://cdn2.iconfinder.com/data/icons/snipicons/5000/play-128.png">
+                  <div class="play"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 style="margin-top: 2px; margin-bottom: 1px;">statistics</h3>
         <div class="section">
           <div class="site-stats">
             <div id="created"></div>
             <div id="updated"></div>
             <div id="visitors"></div>
-            <div id="followers"></div>
           </div>
         </div>
       </div>
@@ -35,36 +54,33 @@
 
     <div class="content-column">
       <div class="box">
-        <div class="title">
-          <h2>welcome to my website!</h2>
-        </div>
         <div class="main-content">
-          <p>currently under construction. mind the mess!</p>
-          <img src="https://naes.nekoweb.org/cat.gif">
-        </div>
-        <div class="footer">
-          naes.tech
-        </div>
-      </div>
-    </div>
-    
-    <div class="ipod-column">
-      <div class="back-cover">
-        <div class="main">
-          <div class="screen">
-            <a href="https://www.last.fm/user/naestech" target="_blank">
-              <div id="lastfm" class="track-display"></div>
-            </a>
-          </div>
-          <div class="navigator">        
-            <div class="keys">       
-              <span class="menu-btn">MENU</span>
-              <img class="fwd" src="https://cdn2.iconfinder.com/data/icons/snipicons/5000/fast-forward-256.png">
-              <img class="bkd" src="https://cdn2.iconfinder.com/data/icons/snipicons/5000/fast-backward-128.png">
-              <img class="play-pause" src="https://cdn2.iconfinder.com/data/icons/snipicons/5000/play-128.png">
-              <div class="play"></div>
-            </div>
-          </div>
+          <h1>hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi!</h1>
+          <h2>hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi!</h2>
+          <h3>hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi!</h3>
+          <p>hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi! hi!</p>
+          <p>here</p>
+          <p>are</p>
+          <p>some</p>
+          <p>words</p>
+          <p>to</p>
+          <p>see</p>
+          <p>what</p>
+          <p>length</p>
+          <p>looks</p>
+          <p>good</p>
+          <p>here.</p>
+          <br>
+          <p>some</p>
+          <p>more</p>
+          <p>words</p>
+          <p>to</p>
+          <p>see</p>
+          <p>what</p>
+          <p>length</p>
+          <p>looks</p>
+          <p>good</p>
+          <p>here.</p>
         </div>
       </div>
     </div>
@@ -83,7 +99,6 @@
           
           const month = String(date.getMonth() + 1).padStart(2, '0');
           const day = String(date.getDate()).padStart(2, '0');
-          
           const year = String(date.getFullYear()).slice(-2);
           
           return `${month}.${day}.${year}`;
@@ -95,7 +110,6 @@
         if (document.getElementById("created")) document.getElementById("created").innerHTML = `<em>created:</em> ${created}`;
         if (document.getElementById("updated")) document.getElementById("updated").innerHTML = `<em>updated:</em> ${updated}`;
         if (document.getElementById("visitors")) document.getElementById("visitors").innerHTML = `<em>visits:</em> ${json.views}`;
-        if (document.getElementById("followers")) document.getElementById("followers").innerHTML = `<em>followers:</em> ${json.followers}`;
       } catch (error) {
         console.error(error);
       }
@@ -136,10 +150,24 @@
                     }
                 }
 
+                const scrollDuration = "30s";
+
                 document.getElementById("lastfm").innerHTML = `
-                    <div class="song">${trackData.name}</div>
-                    <div class="artist">${trackData.artist}</div>
-                    <div class="album">${trackData.album || 'Unknown Album'}</div>
+                    <div class="song">
+                        <span class="${trackData.name.length > 12 ? 'scrolling-text' : 'static-text'}" 
+                              style="${trackData.name.length > 12 ? `--duration: ${scrollDuration}; --scroll-width: ${trackData.name.length * 40}px;` : ''}">
+                              ${trackData.name}</span>
+                    </div>
+                    <div class="artist">
+                        <span class="${trackData.artist.length > 12 ? 'scrolling-text' : 'static-text'}"
+                              style="${trackData.artist.length > 12 ? `--duration: ${scrollDuration}; --scroll-width: ${trackData.artist.length * 40}px;` : ''}">
+                              ${trackData.artist}</span>
+                    </div>
+                    <div class="album">
+                        <span class="${trackData.album.length > 12 ? 'scrolling-text' : 'static-text'}"
+                              style="${trackData.album.length > 12 ? `--duration: ${scrollDuration}; --scroll-width: ${trackData.album.length * 40}px;` : ''}">
+                              ${trackData.album}</span>
+                    </div>
                 `;
             } else {
                 screen.classList.remove('now-playing', 'last-played');
