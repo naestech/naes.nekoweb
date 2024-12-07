@@ -1,52 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>nae!</title>
-  <link rel="stylesheet" href="home.css">
-</head>
-<body>
-    <div class="container">
-        <div class="content">
-            <div class="grid">
-                <!-- menu -->
-                <div class="menu-wrapper">
-                    <div class="menu-section">
-                        <a href="#" class="link-block">
-                            <div class="menuitem">Menu Item 1</div>
-                        </a>
-                        <a href="#" class="link-block-2">
-                            <div class="menuitem">Menu Item 2</div>
-                        </a>
-                        <a href="#" class="link-block-3">
-                            <div class="menuitem">Menu Item 3</div>
-                        </a>
-                        <a href="#" class="link-block-4">
-                            <div class="menuitem">Menu Item 4</div>
-                        </a>
-                        <a href="#" class="link-block-5">
-                            <div class="menuitem">Menu Item 5</div>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- welcome &about me -->
-                <div class="aboutme">
-                    <h2>nae's.nekoweb</h2>
-                    <p>about me lives here. it'll be rewritten when i can think of something super clever and witty.</p>
-                </div>
-                
-                <!-- into blurb -->
-                <div class="intoblurb">
-                    <h3>getting really into ... these days:</h3>
-                    <p>aespa!!</p>
-                </div>
 
-                <!-- robot -->
-                <div class="robot"></div>
-            </div>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>naes.nekoweb</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+<div class="parent">
+
+    <div class="header">
+        <h1>welcome to nae's.nekoweb</h1>
     </div>
+
+    <div class="navigation">
+        <a href="/guestbook.html" class="nav-item">guestbook</a> <br>
+        <a href="/blog.html" class="nav-item">blog</a> <br>
+        <a href="/moodboard.html" class="nav-item">moodboard</a> <br>
+        <a href="/links.html" class="nav-item">links</a>
+    </div>
+
+    <div class="sidebar">
+        <div id="created"></div>
+        <div id="updated"></div>
+        <div id="visitors"></div>
+
+        <script>
+            let username = "naes";
+            (async () => {
+              try {
+                console.log('Fetching data...');
+                const request = await fetch(`https://nekoweb.org/api/site/info/${username}`);
+                if (!request.ok) {
+                  throw new Error(`HTTP error! status: ${request.status}`);
+                }
+                const json = await request.json();
+                console.log('Received data:', json);
+                
+                const formatDate = (dateString) => {
+                  const date = new Date(dateString);
+                  const month = String(date.getMonth() + 1).padStart(2, '0');
+                  const day = String(date.getDate()).padStart(2, '0');
+                  const year = String(date.getFullYear()).slice(-2);
+                  return `${month}.${day}.${year}`;
+                };
+        
+                const updated = formatDate(json.updated_at);
+                const created = formatDate(json.created_at);
+        
+                if (document.getElementById("created")) document.getElementById("created").innerHTML = `<em>created:</em> ${created}`;
+                if (document.getElementById("updated")) document.getElementById("updated").innerHTML = `<em>updated:</em> ${updated}`;
+                if (document.getElementById("visitors")) document.getElementById("visitors").innerHTML = `<em>visitors:</em> ${json.views}`;
+              } catch (error) {
+                console.error('Error fetching data:', error);
+                document.querySelector('.sidebar').innerHTML += `<div class="error">Error loading data</div>`;
+              }
+            })();
+        </script>
+    </div>
+
+    <div class="body">
+        <p>this is about me</p>
+    </div>
+
+    <div class="status">
+        <h3>this is what im really into</h3>
+    </div>
+</div>
+
 </body>
+
 </html>
