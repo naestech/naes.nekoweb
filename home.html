@@ -13,32 +13,30 @@
 <div class="parent">
 
     <div class="header">
-        <h1>welcome to nae's.nekoweb</h1>
+        <img src="websiteHeader.png" alt="website header collage">
     </div>
 
     <div class="navigation">
-        <a href="/guestbook.html" class="nav-item">guestbook</a> <br>
-        <a href="/blog.html" class="nav-item">blog</a> <br>
-        <a href="/moodboard.html" class="nav-item">moodboard</a> <br>
-        <a href="/links.html" class="nav-item">links</a>
+        <a href="/guestbook.html" class="nav-item">guestbook</a>
     </div>
 
     <div class="sidebar">
         <div id="created"></div>
         <div id="updated"></div>
         <div id="visitors"></div>
+        <img src="robot.png" alt="robot">
 
         <script>
             let username = "naes";
             (async () => {
               try {
-                console.log('Fetching data...');
+                console.log('fetching data...');
                 const request = await fetch(`https://nekoweb.org/api/site/info/${username}`);
                 if (!request.ok) {
-                  throw new Error(`HTTP error! status: ${request.status}`);
+                  throw new Error(`http error! status: ${request.status}`);
                 }
                 const json = await request.json();
-                console.log('Received data:', json);
+                console.log('received data:', json);
                 
                 const formatDate = (dateString) => {
                   const date = new Date(dateString);
@@ -51,11 +49,11 @@
                 const updated = formatDate(json.updated_at);
                 const created = formatDate(json.created_at);
         
-                if (document.getElementById("created")) document.getElementById("created").innerHTML = `<em>created:</em> ${created}`;
-                if (document.getElementById("updated")) document.getElementById("updated").innerHTML = `<em>updated:</em> ${updated}`;
-                if (document.getElementById("visitors")) document.getElementById("visitors").innerHTML = `<em>visitors:</em> ${json.views}`;
+                if (document.getElementById("created")) document.getElementById("created").innerHTML = `<em>created:</em> <br> ${created}`;
+                if (document.getElementById("updated")) document.getElementById("updated").innerHTML = `<em>updated:</em> <br> ${updated}`;
+                if (document.getElementById("visitors")) document.getElementById("visitors").innerHTML = `<em>visitors:</em> <br> ${json.views}`;
               } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('error fetching data:', error);
                 document.querySelector('.sidebar').innerHTML += `<div class="error">Error loading data</div>`;
               }
             })();
@@ -63,11 +61,12 @@
     </div>
 
     <div class="body">
-        <p>this is about me</p>
+        <p> hi! i'm nae - a software engineer currently bouncing between texas and california. i've always been passsionate about creating things that make life easier and more enjoyable. when i'm not tinkering with code, you can find me deep in a book, doodling, or lost in music. </p>
+        <p> you can find me online at <a href="https://www.bsky.app/naes.tech">bluesky</a> , <a href="https://github.com/naestech"> github</a> , and <a href="https://www.instagram.com/naes.tech/">instagram</a> .</p>
     </div>
 
     <div class="status">
-        <h3>this is what im really into</h3>
+      <img src="reallyinto.png" alt="getting really into crunchwraps these days">
     </div>
 </div>
 
