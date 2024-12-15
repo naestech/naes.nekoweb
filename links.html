@@ -5,17 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>naes.nekoweb</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="links.css">
 </head>
 
 <body>
+
 <div class="parent">
+
     <div class="header">
-        <img src="websiteHeader.png" alt="website header. tan and blue pattern with a robot smiling.">
+        <img src="websiteHeader.png" alt="website header collage">
     </div>
 
     <div class="navigation">
       <button id="theme">🌌</button>
+
       <script>
         document.addEventListener('DOMContentLoaded', () => {
             const theme = document.getElementById('theme');
@@ -37,14 +40,15 @@
                 updateTheme();
             });
         });
+
       function updateTheme() {
           const theme = document.getElementById('theme');
           theme.textContent = document.body.classList.contains('light') ? '🌌' : '🌄';
       }
       </script>
-        <a href="/home.html" class="nav-item">home</a> <br> 
-        <a href="/guestbook.html" class="nav-item">guestbook</a> <br>
-        <a href="/links.html" class="nav-item">links</a>
+      <a href="/home.html" class="nav-item">home</a> <br>
+      <a href="/guestbook.html" class="nav-item">guestbook</a> <br>
+      <a href="/links.html" class="nav-item">links</a> <br>
     </div>
 
     <div class="sidebar">
@@ -82,7 +86,7 @@
               document.querySelector('.sidebar').innerHTML += `<div class="error">error loading site stats. </div>`;
             }
           })();
-      </script>
+      </script> 
 
       <div id="lastfm"></div>
       <script>
@@ -94,24 +98,23 @@
                 const request = await fetch(BASE_URL);
                 const json = await request.json();
 
-                let isPlaying = json.track['@attr']?.nowplaying || false;
-                let status = isPlaying ? "now playing:" : "last played:";
+          let isPlaying = json.track['@attr']?.nowplaying || false;
+          let status = isPlaying ? "now playing:" : "last played:";
 
-                document.getElementById("lastfm").innerHTML = `
-                    <br> 
-                    <em>${status}</em>
-                    <img src="${json.track.image[1]['#text']}">
-                    <span class="track-title">${json.track.name}</span>
-                    <span class="track-artist">${json.track.artist['#text']}</span>
-                `;
-            } catch (error) {
-                console.error('error fetching track:', error);
-                document.getElementById("sidebar").innerHTML = `
-                    <div id="trackInfo">
-                        <p>unable to load scrobble</p>
-                    </div>
-                `;
-            }
+          document.getElementById("lastfm").innerHTML = `
+              <br> 
+              <em>${status}</em>
+              <span class="track-title">${json.track.name}</span>
+              <span class="track-artist">${json.track.artist['#text']}</span>
+          `;
+      } catch (error) {
+          console.error('error fetching track:', error);
+          document.getElementById("sidebar").innerHTML = `
+              <div id="trackInfo">
+                  <p>unable to load scrobble</p>
+              </div>
+          `;
+      }
         };
 
         getTrack();
@@ -120,20 +123,19 @@
     </div>
 
     <div class="body">
-        <p> hi! i'm nae - a software engineer currently bouncing between texas and california. i've always been passsionate about creating things that make life easier and more enjoyable. when i'm not tinkering with code, you can find me deep in a book, doodling, or lost in music. </p>
-    </div>
-
-    <div class="status">
-      <div id="statuscafe">
-        <div id="statuscafe-username">
-        </div>
-        <div id="statuscafe-content">
-        </div>
-      </div>
-      <script src="https://status.cafe/current-status.js?name=naes" defer>
-      </script>
+        <p> find me online at:
+          <br>
+          <br>
+          <a href="https://www.bsky.app/naes.tech">bluesky</a>
+          <br>
+          <a href="https://github.com/naestech"> github</a>
+          <br>
+          <a href="https://www.instagram.com/naes.tech/">instagram</a>
+        </p>
     </div>
 
 </div>
+
 </body>
+
 </html>
